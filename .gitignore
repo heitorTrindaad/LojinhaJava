@@ -21,3 +21,4 @@ Thumbs.db
 # Se futuramente usar Node.js/Vue/Tailwind, estas linhas já protegem...
 **/node_modules/
 **/dist/
+frontend/src/router/index.js

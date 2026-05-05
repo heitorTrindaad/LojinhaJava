@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lojinha</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ─── AUTH PAGE ─────────────────────────────────────────── -->
+  <div id="page-auth" class="page active">
+    <div class="auth-container">
+      <div class="auth-logo">
+        <h1>LOJINHA</h1>
+        <p>Seu marketplace favorito</p>
+      </div>
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" onclick="switchAuthTab('login')">Entrar</button>
+        <button class="auth-tab" onclick="switchAuthTab('cadastro')">Criar Conta</button>
+      </div>
+
+      <!-- Login Form -->
+      <div id="form-login" class="auth-form active">
+        <div class="field-group">
+          <label>E-mail</label>
+          <input id="login-email" type="email" placeholder="voce@exemplo.com" />
+        </div>
+        <div class="field-group">
+          <label>Senha</label>
+          <input id="login-senha" type="password" placeholder="••••••••" />
+        </div>
+        <div id="login-alert" class="alert alert-error"></div>
+        <button class="btn-primary" id="login-btn" onclick="doLogin()">Entrar na Lojinha</button>
+      </div>
+
+      <!-- Cadastro Form -->
+      <div id="form-cadastro" class="auth-form">
+        <div class="field-group">
+          <label>Nome Completo</label>
+          <input id="cad-nome" type="text" placeholder="Seu nome" />
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label>E-mail</label>
+            <input id="cad-email" type="email" placeholder="voce@exemplo.com" />
+          </div>
+          <div class="field-group">
+            <label>Telefone</label>
+            <input id="cad-telefone" type="text" placeholder="(11) 91234-5678" />
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Senha</label>
+          <input id="cad-senha" type="password" placeholder="Mínimo 6 caracteres" />
+        </div>
+        <div class="field-group">
+          <label>Você é</label>
+          <select id="cad-tipo">
+            <option value="COMPRADOR">Comprador</option>
+            <option value="VENDEDOR">Vendedor</option>
+          </select>
+        </div>
+        <div id="cad-alert" class="alert alert-error"></div>
+        <button class="btn-primary" id="cad-btn" onclick="doCadastro()">Criar minha conta</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SHOP PAGE ──────────────────────────────────────────── -->
+  <div id="page-shop" class="page">
+    <nav>
+      <div class="nav-logo">LOJI<span>NHA</span></div>
+      <div class="nav-links">
+        <a href="#" class="active" onclick="showPage('shop')">Vitrine</a>
+      </div>
+      <div class="nav-right">
+        <div class="user-info">
+          <div class="user-chip" id="nav-user-chip">—</div>
+          <button class="logout-btn" onclick="doLogout()">Sair</button>
+        </div>
+        <button class="cart-btn" onclick="showPage('cart')">
+          🛒 Carrinho
+          <span class="cart-badge" id="cart-badge">0</span>
+        </button>
+      </div>
+    </nav>
+
+    <div class="shop-hero">
+      <div class="hero-headline">Bem-vindo à <br><strong>Lojinha</strong></div>
+      <p class="hero-sub">Explore nossos produtos com qualidade garantida.</p>
+    </div>
+
+    <div class="shop-controls">
+      <div class="search-wrap">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input class="search-input" id="search-input" type="text" placeholder="Buscar produtos..." oninput="filterProducts()" />
+      </div>
+      <select class="filter-select" id="filter-tipo" onchange="filterProducts()">
+        <option value="">Todos os tipos</option>
+        <option value="ELETRONICO">Eletrônicos</option>
+        <option value="VESTUARIO">Vestuário</option>
+        <option value="ALIMENTO">Alimentos</option>
+      </select>
+      <button class="btn-new-product" id="btn-new-product" style="display:none" onclick="openNewProductModal()">
+        + Novo Produto
+      </button>
+    </div>
+
+    <div class="products-grid" id="products-grid">
+      <div class="loading-grid">
+        <div class="spinner"></div>
+        Carregando produtos...
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── PRODUCT DETAIL PAGE ───────────────────────────────── -->
+  <div id="page-detail" class="page">
+    <nav>
+      <div class="nav-logo">LOJI<span>NHA</span></div>
+      <div class="nav-links">
+        <a href="#" onclick="showPage('shop')">Vitrine</a>
+      </div>
+      <div class="nav-right">
+        <div class="user-chip" id="detail-user-chip">—</div>
+        <button class="logout-btn" onclick="doLogout()">Sair</button>
+        <button class="cart-btn" onclick="showPage('cart')">
+          🛒 <span class="cart-badge" id="detail-cart-badge">0</span>
+        </button>
+      </div>
+    </nav>
+
+    <div class="detail-back" onclick="showPage('shop')">← Voltar à vitrine</div>
+    <div class="detail-layout" id="detail-content"></div>
+  </div>
+
+  <!-- ─── CART PAGE ──────────────────────────────────────────── -->
+  <div id="page-cart" class="page">
+    <nav>
+      <div class="nav-logo">LOJI<span>NHA</span></div>
+      <div class="nav-links">
+        <a href="#" onclick="showPage('shop')">Vitrine</a>
+      </div>
+      <div class="nav-right">
+        <div class="user-chip" id="cart-user-chip">—</div>
+        <button class="logout-btn" onclick="doLogout()">Sair</button>
+      </div>
+    </nav>
+
+    <div class="cart-header">Meu <strong>Carrinho</strong></div>
+    <div class="cart-layout" id="cart-layout"></div>
+  </div>
+
+  <!-- ─── NEW PRODUCT MODAL ──────────────────────────────────── -->
+  <div id="modal-new-product" class="modal-overlay">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('modal-new-product')">✕</button>
+      <div class="modal-title">Cadastrar Produto</div>
+      <div class="modal-form">
+        <div class="field-group">
+          <label>Nome do Produto</label>
+          <input id="np-nome" type="text" placeholder="Ex: Camiseta Premium" />
+        </div>
+        <div class="field-group">
+          <label>Descrição</label>
+          <input id="np-descricao" type="text" placeholder="Descreva o produto..." />
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label>Preço (R$)</label>
+            <input id="np-preco" type="number" step="0.01" placeholder="0,00" />
+          </div>
+          <div class="field-group">
+            <label>Estoque</label>
+            <input id="np-estoque" type="number" placeholder="0" />
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Categoria</label>
+          <select id="np-tipo">
+            <option value="ELETRONICO">Eletrônico</option>
+            <option value="VESTUARIO">Vestuário</option>
+            <option value="ALIMENTO">Alimento</option>
+          </select>
+        </div>
+        <div id="np-alert" class="alert alert-error"></div>
+        <button class="btn-primary" onclick="doNewProduct()">Publicar Produto</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── DELETE CONFIRM MODAL ──────────────────────────────── -->
+  <div id="modal-delete" class="modal-overlay">
+    <div class="modal modal-delete-inner">
+      <div class="delete-icon">🗑️</div>
+      <div class="modal-title">Excluir Produto</div>
+      <div class="delete-warning">Esta ação não pode ser desfeita. Confirme sua senha para continuar.</div>
+      <div class="field-group" style="text-align:left; margin-bottom:16px;">
+        <label>Sua Senha</label>
+        <input id="del-senha" type="password" placeholder="••••••••" />
+      </div>
+      <div id="del-alert" class="alert alert-error" style="margin-bottom:12px;"></div>
+      <div class="delete-actions">
+        <button class="btn-secondary" onclick="closeModal('modal-delete')">Cancelar</button>
+        <button class="btn-danger" onclick="confirmDelete()">Sim, excluir</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── TOAST CONTAINER ────────────────────────────────────── -->
+  <div id="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
