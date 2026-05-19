@@ -1,50 +1,41 @@
+version: '3.8'
+
 services:
   db:
-    image: mysql:9.0
+    image: mysql:8.0
     container_name: lojinha-db
     restart: always
     environment:
-      # Valores puxados do seu .env
-      MYSQL_DATABASE: ${DB_NAME}
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: lojinhadb
+      MYSQL_ROOT_PASSWORD: root
     ports:
       - "3306:3306"
-    healthcheck:
-      # Atualizado para usar a senha do root definida no seu .env
-      test:
-        [
-          "CMD",
-          "mysqladmin",
-          "ping",
-          "-h",
-          "localhost",
-          "-u",
-          "root",
-          "-p${DB_ROOT_PASSWORD}",
-        ]
-      timeout: 5s
-      retries: 10
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - lojinha-network
 
   app:
-    build: ./backend
+    build: .
     container_name: lojinha-app
+    restart: always
     ports:
       - "8080:8080"
     depends_on:
-      db:
-        condition: service_healthy
+      - db
+    # Injeção das variáveis que o nosso application.properties vai ler
     environment:
-      # Conecta usando as credenciais do usuário 'demon_user' do .env
-      - SPRING_DATASOURCE_URL=${DB_URL}
-      - SPRING_DATASOURCE_USERNAME=${DB_USER}
-      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE}
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_NAME=lojinhadb
+      - DB_USER=root
+      - DB_PASSWORD=root
+    networks:
+      - lojinha-network
 
-  frontend:
-    build: ./frontend
-    container_name: lojinha-front
-    ports:
-      - "80:80"
-    depends_on:
-      - app
+volumes:
+  db_data:
+
+networks:
+  lojinha-network:
+    driver: bridge
