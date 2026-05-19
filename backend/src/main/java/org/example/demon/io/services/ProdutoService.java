@@ -1,12 +1,13 @@
-package org.example.demon.io.produtoModule;
+package org.example.demon.io.services;
 
 import java.util.List;
 
-import org.example.demon.io.commonModule.LoginDto;
+import org.example.demon.io.dto.LoginDto;
+import org.example.demon.io.dto.ProdutoDto;
 import org.example.demon.io.models.Produto;
 import org.example.demon.io.models.Usuario;
-import org.example.demon.io.usuarioModule.UsuarioRepository;
-import org.example.demon.io.usuarioModule.UsuarioService;
+import org.example.demon.io.repositories.ProdutoRepository;
+import org.example.demon.io.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import jakarta.transaction.Transactional;
@@ -41,24 +42,22 @@ public class ProdutoService {
     }
 
     public void deletarProdutoCorrigido(int id, String senha) {
-    String emailLogado = SecurityContextHolder.getContext().getAuthentication().getName();
-    Produto produto = produtoRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Produto Não Encontrado"));
+        String emailLogado = SecurityContextHolder.getContext().getAuthentication().getName();
+        Produto produto = produtoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Produto Não Encontrado"));
 
-    if (!produto.getVendedor().getEmail().equals(emailLogado)) {
-        throw new RuntimeException("VOCÊ NÃO TEM PERMISSÃO DE EXCLUIR PRODUTO DE OUTRA PESSOA");
+        if (!produto.getVendedor().getEmail().equals(emailLogado)) {
+            throw new RuntimeException("VOCÊ NÃO TEM PERMISSÃO DE EXCLUIR PRODUTO DE OUTRA PESSOA");
+        }
+
+        // Mantendo sua lógica de re-autenticação antes de deletar
+        LoginDto loginDto = new LoginDto();
+        loginDto.setEmail(emailLogado);
+        loginDto.setSenha(senha);
+        usuarioService.verificarLogin(loginDto);
+
+        produtoRepository.delete(produto);
     }
-
-    
-
-    // Mantendo sua lógica de re-autenticação antes de deletar
-    LoginDto loginDto = new LoginDto();
-    loginDto.setEmail(emailLogado);
-    loginDto.setSenha(senha);
-    usuarioService.verificarLogin(loginDto);
-
-    produtoRepository.delete(produto);
-}
 
     public List<Produto> buscarTodos() {
         return produtoRepository.findAll();

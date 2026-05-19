@@ -1,6 +1,7 @@
-package org.example.demon.io.usuarioModule;
+package org.example.demon.io.services;
 
 import org.example.demon.io.models.Usuario;
+import org.example.demon.io.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

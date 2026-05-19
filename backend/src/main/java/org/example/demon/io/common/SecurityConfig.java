@@ -1,4 +1,4 @@
-package org.example.demon.io.commonModule;
+package org.example.demon.io.common;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,10 +15,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(org.springframework.http.HttpMethod.GET, "/produtos").permitAll() 
+                        .requestMatchers(org.springframework.http.HttpMethod.GET, "/produtos").permitAll()
                         .requestMatchers("/usuarios/cadastrar", "/usuarios/login").permitAll()
-                        .anyRequest().authenticated()
-                )
+                        .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults());
         return http.build();
     }

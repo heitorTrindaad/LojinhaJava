@@ -1,8 +1,10 @@
-package org.example.demon.io.usuarioModule;
+package org.example.demon.io.services;
 
-import org.example.demon.io.commonModule.LoginDto;
-import org.example.demon.io.commonModule.enums.TipoUsuario;
+import org.example.demon.io.common.enums.TipoUsuario;
+import org.example.demon.io.dto.LoginDto;
+import org.example.demon.io.dto.UsuarioDtoEntry;
 import org.example.demon.io.models.Usuario;
+import org.example.demon.io.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,7 +30,7 @@ public class UsuarioService {
         usuario.setTelefone(dto.getTelefone());
         usuario.setTipo(dto.getTipo());
         usuario.setSenha(passwordEncoder.encode(dto.getSenha()));
-        
+
         usuarioRepository.save(usuario);
     }
 
@@ -48,7 +50,7 @@ public class UsuarioService {
     public void remover(int id) {
         // 1. Pega o e-mail de quem está logado no sistema
         String emailLogado = SecurityContextHolder.getContext().getAuthentication().getName();
-        
+
         Usuario logado = usuarioRepository.findByEmail(emailLogado)
                 .orElseThrow(() -> new RuntimeException("Usuário logado não encontrado"));
 

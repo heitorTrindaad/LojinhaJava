@@ -1,6 +1,8 @@
-package org.example.demon.io.produtoModule;
+package org.example.demon.io.controllers;
 
+import org.example.demon.io.dto.ProdutoDto;
 import org.example.demon.io.models.Produto;
+import org.example.demon.io.services.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

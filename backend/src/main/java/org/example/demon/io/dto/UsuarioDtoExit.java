@@ -1,6 +1,6 @@
-package org.example.demon.io.usuarioModule;
+package org.example.demon.io.dto;
 
-import org.example.demon.io.commonModule.enums.TipoUsuario;
+import org.example.demon.io.common.enums.TipoUsuario;
 
 public class UsuarioDtoExit {
     private String nome;

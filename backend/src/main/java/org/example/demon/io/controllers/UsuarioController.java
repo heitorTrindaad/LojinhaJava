@@ -1,6 +1,8 @@
-package org.example.demon.io.usuarioModule;
+package org.example.demon.io.controllers;
 
-import org.example.demon.io.commonModule.LoginDto;
+import org.example.demon.io.dto.LoginDto;
+import org.example.demon.io.dto.UsuarioDtoEntry;
+import org.example.demon.io.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

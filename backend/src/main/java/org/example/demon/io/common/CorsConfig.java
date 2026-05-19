@@ -1,4 +1,4 @@
-package org.example.demon.io.commonModule;
+package org.example.demon.io.common;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

@@ -1,4 +1,4 @@
-package org.example.demon.io.produtoModule;
+package org.example.demon.io.repositories;
 
 import java.util.List;
 

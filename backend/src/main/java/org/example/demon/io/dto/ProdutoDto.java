@@ -1,4 +1,4 @@
-package org.example.demon.io.produtoModule;
+package org.example.demon.io.dto;
 
 public class ProdutoDto {
     private String nome;

@@ -1,4 +1,4 @@
-package org.example.demon.io.compraModule;
+package org.example.demon.io.repositories;
 
 import org.example.demon.io.models.Compra;
 import org.springframework.data.jpa.repository.JpaRepository;

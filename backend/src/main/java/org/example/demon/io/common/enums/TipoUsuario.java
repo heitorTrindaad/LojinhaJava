@@ -1,4 +1,4 @@
-package org.example.demon.io.commonModule.enums;
+package org.example.demon.io.common.enums;
 
 public enum TipoUsuario {
     VENDEDOR,

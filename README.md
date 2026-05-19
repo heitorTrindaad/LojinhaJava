@@ -12,25 +12,25 @@ O sistema foi desenvolvido parcialmente por mim e posteriormente evoluído a par
 
 ### 🔙 Backend
 
-* Java 21
-* Spring Boot
-* Spring Data JPA
-* Spring Security
-* Hibernate
+- Java 21
+- Spring Boot
+- Spring Data JPA
+- Spring Security
+- Hibernate
 
 ### 🗄 Banco de Dados
 
-* MySQL
+- MySQL
 
 ### 🌐 Frontend
 
-* HTML, CSS, JavaScript
+- HTML, CSS, JavaScript
 
 ### 🐳 DevOps
 
-* Docker
-* Docker Compose
-* Nginx
+- Docker
+- Docker Compose
+- Nginx
 
 ---
 
@@ -38,31 +38,31 @@ O sistema foi desenvolvido parcialmente por mim e posteriormente evoluído a par
 
 ### 👤 Usuários
 
-* Cadastro de usuários (comprador/vendedor)
-* Autenticação de login
-* Desativação de conta
-* Controle de permissões (ADMIN, VENDEDOR, COMPRADOR)
+- Cadastro de usuários (comprador/vendedor)
+- Autenticação de login
+- Desativação de conta
+- Controle de permissões (ADMIN, VENDEDOR, COMPRADOR)
 
 ### 📦 Produtos
 
-* Cadastro de produtos
-* Listagem de produtos
-* Exclusão com validação de permissão
-* Associação com vendedor
+- Cadastro de produtos
+- Listagem de produtos
+- Exclusão com validação de permissão
+- Associação com vendedor
 
 ### 🛍 Compras
 
-* Finalização de compra
-* Validação de estoque
-* Associação entre usuário e produtos comprados
+- Finalização de compra
+- Validação de estoque
+- Associação entre usuário e produtos comprados
 
 ---
 
 ## 🔐 Segurança
 
-* Autenticação utilizando Spring Security
-* Controle de acesso por rotas
-* Validação de identidade para ações sensíveis
+- Autenticação utilizando Spring Security
+- Controle de acesso por rotas
+- Validação de identidade para ações sensíveis
 
 > 🔄 Melhorias futuras: implementação de autenticação via JWT
 
@@ -70,10 +70,10 @@ O sistema foi desenvolvido parcialmente por mim e posteriormente evoluído a par
 
 ## 🧠 Regras de Negócio
 
-* Apenas o vendedor pode excluir seus próprios produtos
-* Produtos com estoque zerado não podem ser comprados
-* Apenas usuários autenticados podem realizar compras
-* Validação de credenciais para operações críticas
+- Apenas o vendedor pode excluir seus próprios produtos
+- Produtos com estoque zerado não podem ser comprados
+- Apenas usuários autenticados podem realizar compras
+- Validação de credenciais para operações críticas
 
 ---
 
@@ -81,10 +81,10 @@ O sistema foi desenvolvido parcialmente por mim e posteriormente evoluído a par
 
 O backend segue uma arquitetura em camadas:
 
-* **Controller** → Responsável pelas requisições HTTP
-* **Service** → Contém as regras de negócio
-* **Repository** → Acesso ao banco de dados
-* **Model/Entity** → Representação das entidades
+- **Controller** → Responsável pelas requisições HTTP
+- **Service** → Contém as regras de negócio
+- **Repository** → Acesso ao banco de dados
+- **Model/Entity** → Representação das entidades
 
 ---
 
@@ -92,7 +92,7 @@ O backend segue uma arquitetura em camadas:
 
 ### 🔧 Pré-requisitos
 
-* Docker instalado
+- Docker instalado
 
 ### 🚀 Executando com Docker
 
@@ -102,8 +102,8 @@ docker-compose up --build
 
 ### 🌍 Acesso
 
-* Frontend: http://localhost
-* Backend: http://localhost:8080
+- Frontend: http://localhost
+- Backend: http://localhost:8080
 
 ```
 
@@ -111,7 +111,7 @@ docker-compose up --build
 
 ## 📄 Melhorias Implementadas neste Fork
 
-- Reorganização das classes, saindo de arquitetura modular para arquitetura em camadas
+- Reorganização de arquitetura em modulos para arquitetura em camadas.
 
 ---
 

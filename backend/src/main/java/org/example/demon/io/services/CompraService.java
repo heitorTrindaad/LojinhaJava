@@ -1,11 +1,11 @@
-package org.example.demon.io.compraModule;
+package org.example.demon.io.services;
 
 import java.util.List;
 import org.example.demon.io.models.Compra;
 import org.example.demon.io.models.Produto;
 import org.example.demon.io.models.Usuario;
-import org.example.demon.io.produtoModule.ProdutoRepository;
-import org.example.demon.io.usuarioModule.UsuarioService;
+import org.example.demon.io.repositories.CompraRepository;
+import org.example.demon.io.repositories.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -23,22 +23,22 @@ public class CompraService {
     private UsuarioService usuarioService;
 
     @Transactional
-public void finalizarCompra(List<Integer> produtosIds) {
-    String emailLogado = SecurityContextHolder.getContext().getAuthentication().getName();
-    Usuario comprador = usuarioService.buscarPorEmail(emailLogado);
+    public void finalizarCompra(List<Integer> produtosIds) {
+        String emailLogado = SecurityContextHolder.getContext().getAuthentication().getName();
+        Usuario comprador = usuarioService.buscarPorEmail(emailLogado);
 
-    List<Produto> produtosParaComprar = produtoRepository.findAllById(produtosIds);
+        List<Produto> produtosParaComprar = produtoRepository.findAllById(produtosIds);
 
-    for (Produto produto : produtosParaComprar) {
-        if (produto.getEstoque() <= 0) {
-            throw new RuntimeException("O produto " + produto.getNome() + " está esgotado!");
+        for (Produto produto : produtosParaComprar) {
+            if (produto.getEstoque() <= 0) {
+                throw new RuntimeException("O produto " + produto.getNome() + " está esgotado!");
+            }
+            produto.setEstoque(produto.getEstoque() - 1);
         }
-        produto.setEstoque(produto.getEstoque() - 1); 
-    }
 
-    Compra compra = new Compra();
-    compra.setComprador(comprador);
-    compra.setProdutos(produtosParaComprar);
-    compraRepository.save(compra);
-}
+        Compra compra = new Compra();
+        compra.setComprador(comprador);
+        compra.setProdutos(produtosParaComprar);
+        compraRepository.save(compra);
+    }
 }
