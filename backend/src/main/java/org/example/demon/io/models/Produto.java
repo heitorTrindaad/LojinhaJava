@@ -1,6 +1,6 @@
 package org.example.demon.io.models;
 
-import org.example.demon.io.common.enums.TipoProduto;
+import org.example.demon.io.config.enums.TipoProduto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;

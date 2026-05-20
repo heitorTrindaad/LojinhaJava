@@ -1,6 +1,6 @@
 package org.example.demon.io.services;
 
-import org.example.demon.io.common.enums.TipoUsuario;
+import org.example.demon.io.config.enums.TipoUsuario;
 import org.example.demon.io.dto.LoginDto;
 import org.example.demon.io.dto.UsuarioDtoEntry;
 import org.example.demon.io.models.Usuario;

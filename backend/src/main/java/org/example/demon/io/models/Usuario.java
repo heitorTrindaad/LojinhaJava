@@ -3,7 +3,7 @@ package org.example.demon.io.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.example.demon.io.common.enums.TipoUsuario;
+import org.example.demon.io.config.enums.TipoUsuario;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 

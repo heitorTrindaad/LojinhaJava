@@ -1,6 +1,6 @@
 package org.example.demon.io.dto;
 
-import org.example.demon.io.common.enums.TipoUsuario;
+import org.example.demon.io.config.enums.TipoUsuario;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Email;

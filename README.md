@@ -112,6 +112,7 @@ docker-compose up --build
 ## 📄 Melhorias Implementadas neste Fork
 
 - Reorganização de arquitetura em modulos para arquitetura em camadas.
+- Refatoração das propriedades para que o app tanto de forma completa no docker, quanto parcialmente com apenas a database no docker.
 
 ---
 
@@ -120,7 +121,6 @@ docker-compose up --build
 - Implementação de autenticação com JWT
 - Criação de testes automatizados (JUnit e Mockito)
 - Documentação da API com Swagger
-- Deploy em ambiente cloud
 
 ---
 

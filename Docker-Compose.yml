@@ -30,6 +30,7 @@ services:
       - DB_NAME=lojinhadb
       - DB_USER=root
       - DB_PASSWORD=root
+#      - JWT_SECRET=QualquerTextoAbsurdamenteGiganteEAlfanumericoAquiDentro
     networks:
       - lojinha-network
 
